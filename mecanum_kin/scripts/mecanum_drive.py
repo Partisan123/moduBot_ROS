@@ -115,12 +115,8 @@ def set_Orientation(publisher , speed_deg, desired_angle_deg):
     rel_deg = math.degrees(abs(relative_angle))
     rotate(publisher, speed_deg, rel_deg ,clockwise)
 
-def drive(vel_y, vel_x, ang__vel_z):
-
-    vel_msg = Twist()
-
-    # vel_msg.linear.y = 
-
+# def drive(vel_y, vel_x, ang__vel_z):
+    
 
 
 if __name__ == '__main__':
@@ -131,10 +127,7 @@ if __name__ == '__main__':
         #declare velocity pub
         cmd_vel_topic = '/turtle1/cmd_vel'
         vel_pub = rospy.Publisher(cmd_vel_topic , Twist , queue_size=10)
-        vel_y = rospy.Publisher("/lin_y" , Twist, queue_size=10 )
-        vel_x = rospy.Publisher("/lin_x" , Twist, queue_size=10 )
-        ang_vel_z = rospy.Publisher("/ang_z" , Twist, queue_size=10 )
-
+        
         #sub position
         pos_topic = '/turtle1/pose'
         pose_sub = rospy.Subscriber(pos_topic , Pose , poseCallback)
@@ -142,7 +135,7 @@ if __name__ == '__main__':
         
         # Get ROS Params
 
-
+        # drive(vel_x , vel_y, ang__vel_z)
         # move(vel_pub , 1.0 , 4.0, True)
         # rotate(vel_pub , 30 , 90 , True)
         # go_to_goal(vel_pub,1.0,1.0)

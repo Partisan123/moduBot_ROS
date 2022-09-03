@@ -7,7 +7,7 @@
   <node pkg="rosserial_arduino" type="serial_node.py" 
         name="serial_node" respawn="true">
     <param name="port" type="string" value="/dev/ttyACM0" />
-    <param name="baud" type="int" value="112500" />
+    <param name="baud" type="int" value="115200" />
   </node>
 
   <!-- Joystick node -->
@@ -19,11 +19,11 @@
 
   <!-- Axes -->
   <!-- The values are the button configurations of Xbox 360 conrtoller!!! see wiki.ros.org -->
-  <param name="axis_linear_x" value="7" type="int"/>
-  <param name="axis_linear_y" value="6" type="int"/>
+  <param name="axis_linear_y" value="7" type="int"/>
+  <param name="axis_linear_x" value="6" type="int"/>
   <param name="axis_angular" value="3" type="int"/>
-  <param name="scale_linear" value="2" type="double"/>
-  <param name="scale_angular" value="1" type="double"/>
+  <param name="scale_linear" value="100" type="double"/>
+  <param name="scale_angular" value="100" type="double"/>
   <node pkg="joy_drive" type="teleop_joy" name="teleop"/>
 
 </launch>

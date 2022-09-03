@@ -13,22 +13,21 @@ public:
 private:
 
   void joyCallback(const sensor_msgs::Joy::ConstPtr& joy);
-  
   ros::NodeHandle nh_;
 
   int linear_x_,linear_y_, angular_;
   double l_scale_, a_scale_;
   ros::Publisher vel_pub_;
   ros::Subscriber joy_sub_;
-
+  ros::Publisher bot_vel_pub;
 };
 
 
 TeleopTurtle::TeleopTurtle():
 
   linear_x_(1),
-  linear_y_(2),
-  angular_(3)
+  linear_y_(1),
+  angular_(1)
 
 {
 
@@ -40,7 +39,7 @@ TeleopTurtle::TeleopTurtle():
 
   vel_pub_ = nh_.advertise<geometry_msgs::Twist>("turtle1/cmd_vel", 1);
   joy_sub_ = nh_.subscribe<sensor_msgs::Joy>("joy", 10, &TeleopTurtle::joyCallback, this);
-
+  bot_vel_pub = nh_.advertise<geometry_msgs::Twist>("drive_bot", 10);
 }
 
 void TeleopTurtle::joyCallback(const sensor_msgs::Joy::ConstPtr& joy)
@@ -51,11 +50,7 @@ void TeleopTurtle::joyCallback(const sensor_msgs::Joy::ConstPtr& joy)
   twist.linear.x = l_scale_*joy->axes[linear_x_];
   twist.linear.y = l_scale_*joy->axes[linear_y_];
   vel_pub_.publish(twist);
-
-  nh_.setParam("lin_x_drive" , twist.linear.x);
-  nh_.setParam("lin_y_drive" , twist.linear.y);
-  nh_.setParam("ang_z_drive" , twist.angular.z);
-  
+  bot_vel_pub.publish(twist);
 }
 
 
